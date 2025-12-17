@@ -11,7 +11,6 @@ public:
                 low++ , high--;
                 continue;
             }
-
             if(nums[mid]>=nums[low]){
                 if(target>=nums[low] && target<nums[mid]){
                      high = mid - 1;
