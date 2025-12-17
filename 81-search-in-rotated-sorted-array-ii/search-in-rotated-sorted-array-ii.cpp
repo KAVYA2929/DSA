@@ -19,9 +19,6 @@ public:
                 else{
                     low = mid + 1;
                 }
-
-               
-                
             }
             else{
                 if(target>nums[mid] && target<=nums[high]){
@@ -35,3 +32,7 @@ public:
         return false;
     }
 };
+               
+                
+            
+            
