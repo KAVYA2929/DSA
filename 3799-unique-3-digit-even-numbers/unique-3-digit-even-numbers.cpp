@@ -18,7 +18,7 @@ public:
                     if(mp[k] == 0) continue;
                     mp[k]--;
 
-                    int num  = i * 100 + j * 10 + k * 1;
+                    
                     cnt++;
                     mp[k]++;
                 }
