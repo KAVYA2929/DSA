@@ -1,55 +1,43 @@
 class Solution {
 public:
     string reorganizeString(string s) {
-        int n = s.length();
 
-        vector<int> freq(26, 0);
+        vector<int>freq(26,0);
 
-        // Count frequency
-        for(char c : s) {
-            freq[c - 'a']++;
+        for(char ch : s){
+            freq[ch - 'a']++;
         }
 
-        // Find most frequent character
-        int maxFreq = 0;
-        char maxChar;
+        priority_queue<pair<int ,char>>pq;
 
-        for(int i = 0; i < 26; i++) {
-            if(freq[i] > maxFreq) {
-                maxFreq = freq[i];
-                maxChar = 'a' + i;
+        for(int i =0;i<26;i++){
+            if(freq[i] > 0){
+                pq.push({freq[i],i + 'a'});
             }
         }
 
-        // Impossible
-        if(maxFreq > (n + 1) / 2) {
-            return "";
-        }
+        string ans = "";
+        pair<int ,char>prev = {0,'#'};
 
-        string ans(n, ' ');
+         while(!pq.empty()){
 
-        int index = 0;
+            pair<int ,char>curr = pq.top();
+            pq.pop();
 
-        // Put most frequent character first
-        while(freq[maxChar - 'a'] > 0) {
-            ans[index] = maxChar;
-            index += 2;
-            freq[maxChar - 'a']--;
-        }
+            ans += curr.second;
+            curr.first--;
 
-        // Put remaining characters
-        for(int i = 0; i < 26; i++) {
-            while(freq[i] > 0) {
-                if(index >= n) {
-                    index = 1;
-                }
-
-                ans[index] = 'a' + i;
-                index += 2;
-                freq[i]--;
+            if(prev.first > 0){
+                pq.push(prev);
             }
-        }
+            prev = curr;
 
-        return ans;
+            
+
+         }
+         if(s.length() != ans.length()){
+                return "";
+        }
+         return ans;
     }
 };
